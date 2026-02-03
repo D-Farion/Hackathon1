@@ -1,2 +1,2 @@
-"pip freeze -r requirments.txt" put in console to update requirments
-"pip install -r requirments.txt" put in console to download requirments
+"pip freeze -r requirements.txt" put in console to update requirements
+"pip install -r requirements.txt" put in console to download requirements
