@@ -22,12 +22,19 @@ def read_pdf(file_path, class_name):
         #divide the extracted text into seperate lines
         if text:
             lines = text.split("\n")
-            for i, line in enumerate(lines):
+            for line in lines:
                 # find the relevant information for adding to calendar
-                print(f"Line {i}: {line}")
+                parse_line(line)
+
+def parse_line(line):
+    #parse line to extract date, day, time, and description from line
+    #   for date look for month followed by a number
+    #   for day look for day names
+    #   for description look for keywords like Assignment, A, Quiz, Q, Test, Exam, Lab, Tutorial, Project and a following number
+    #add extracted information to a scheduleDate object
+    print(line)
 
 #todo
-#parse lines to extract class name, date, day, time, description from lines
 #reformat information extracted into a single format. eg. A1 and Assignment 1 both becoming Assignment 1 in the class
 #in case of duplicates check new added class description with existing ones
     
