@@ -10,7 +10,7 @@ class scheduleDate:
         self.description = description  #What the calalandar entry is actually for. eg. "Assignment 1"
 
 def main():
-    print(read_pdf("example2.pdf", "COMP"))
+    print(read_pdf("example3.pdf", "COMP"))
 
 def read_pdf(file_path, class_name):
     with open(file_path, 'rb') as file: # Open the PDF file
@@ -36,11 +36,20 @@ def parse_line(line):
 
     months = list(m.lower() for m in calendar.month_name)[1:] # Get list of month names
     months += list(m.lower() for m in calendar.month_abbr)[1:] # Get list of month abbreviations and add to prior list
+    days = list(d.lower() for d in calendar.day_name) # Get list of day names
+    days += list(d.lower() for d in calendar.day_abbr) # Get list of day abbreviations and add to prior list
+    description_types = ["assignment", "a", "quiz", "q", "test", "exam", "lab", "tutorial", "project"]
     for word in line.split(): # Clean the word (remove potential commas, periods, and convert to lowercase)
         cleaned_word = word.strip(',.').lower()
-        if cleaned_word in months:
+        if cleaned_word in months: # Check if the cleaned word is a month
             print(f"Found month: {cleaned_word} in line: {line}")
-    return False
+            #need to check if a number follows for it to be a valid date
+        elif cleaned_word in days: # Check if the cleaned word is a day
+            print(f"Found day: {cleaned_word} in line: {line}")
+        elif cleaned_word in description_types:
+            print(f"Found description: {cleaned_word} in line: {line}")
+            #need to check if a number follows it
+
 
 #todo
 #reformat information extracted into a single format. eg. A1 and Assignment 1 both becoming Assignment 1 in the class
