@@ -26,6 +26,9 @@ def read_pdf(file_path, class_name):
                 # find the relevant information for adding to calendar
                 parse_line(line)
 
+def convert(input): #takes the input and converts to a string in the format wanted
+    return input  
+
 def parse_line(line):
     #parse line to extract date, day, time, and description from line
     #   for date look for month followed by a number
@@ -39,20 +42,27 @@ def parse_line(line):
     days = list(d.lower() for d in calendar.day_name) # Get list of day names
     days += list(d.lower() for d in calendar.day_abbr) # Get list of day abbreviations and add to prior list
     description_types = ["assignment", "a", "quiz", "q", "test", "exam", "lab", "tutorial", "project"]
+    month = ""
+    day = ""
+    description = ""
     for word in line.split(): # Clean the word (remove potential commas, periods, and convert to lowercase)
-        cleaned_word = word.strip(',.').lower()
+        cleaned_word = word.strip(',.()').lower()
         if cleaned_word in months: # Check if the cleaned word is a month
+            month = cleaned_word
             print(f"Found month: {cleaned_word} in line: {line}")
             #need to check if a number follows for it to be a valid date
-        elif cleaned_word in days: # Check if the cleaned word is a day
+        if cleaned_word in days: # Check if the cleaned word is a day
+            day = cleaned_word
             print(f"Found day: {cleaned_word} in line: {line}")
-        elif cleaned_word in description_types:
+        if cleaned_word in description_types:
+            description = cleaned_word
             print(f"Found description: {cleaned_word} in line: {line}")
             #need to check if a number follows it
-
+    if month and day and description: #checks if all 
+        print ("Calendar entry - month:", convert(month), "day:", convert(day), "title", description)
 
 #todo
 #reformat information extracted into a single format. eg. A1 and Assignment 1 both becoming Assignment 1 in the class
-#in case of duplicates check new added class description with existing ones
+#Duplicate check: possibly check new added class description with existing ones
     
 main()
