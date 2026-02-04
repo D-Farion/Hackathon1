@@ -70,11 +70,3 @@ def parsePDF(file_path):
             events.append(event)
 
     return events
-
-#test
-if __name__ == "__main__":
-    events = parsePDF("example3.pdf")
-
-    for event in events:
-        print(event)
-        print("Source: ", event.source_line, "\n")
