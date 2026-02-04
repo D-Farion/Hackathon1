@@ -19,7 +19,7 @@ def create_event(service, calendar_event):
     created_event = service.events().insert(calendarId = 'primary', body = event).execute()
     return(created_event)
 
-def main():
+def logIn():
     creds = None
 
     # The file token.json stores the user's access and refresh tokens, and is
