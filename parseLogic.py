@@ -10,12 +10,13 @@ class calendarEvent:
         self.source_line = source_line
 
     def __repr__(self):
-        return f"Event(title={self.title}, date={self.date})"
+        return f"Event(title = {self.title}, date = {self.date})"
 
 
 #keywords and date patters
-
-keywords = ["assignment", "quiz", "test", "exam", "lab", "tutorial", "project"]
+check = ["final", "assignment", "quiz", "test", "exam", "lab", "tutorial", "project", "midterm"]
+numbers = [" 1", " 2", " 3", " 4", " 5", " 6", " 7", " 8", " 9", " 10", ""]
+keywords = [i + j for i in check for j in numbers]
 
 DATE_PATTERN = re.compile(
     r"(\b\d{4}-\d{2}-\d{2}\b|"          # the format 2026-03-15
@@ -45,7 +46,7 @@ def parsePDF(file_path):
 
         lines = text.split("\n")
         for line in lines:
-            lower_line = line.lower()
+            lower_line = line.strip(':,.()').lower()
 
             #check keyword
             keyword = find_keyword(lower_line)
@@ -69,12 +70,3 @@ def parsePDF(file_path):
             events.append(event)
 
     return events
-
-#test
-if __name__ == "__main__":
-    events = parsePDF("example1.pdf")
-
-    for event in events:
-        print(event)
-        print("Source: ", event.source_line)
-        print()
