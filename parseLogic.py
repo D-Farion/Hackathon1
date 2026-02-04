@@ -1,5 +1,6 @@
 import re
 from pypdf import PdfReader
+from datetime import datetime, timezone
 
 
 # event class 
@@ -59,11 +60,18 @@ def parsePDF(file_path):
                 continue
 
             date_str = date_match.group()
+            current_year = datetime.now().year
+            date_str = f"Feb 6 {current_year}"
+            dt = datetime.strptime(date_str, "%b %d %Y")
+
+            # 2. Convert to UTC and then to RFC3339 format
+            # Using .replace(tzinfo=timezone.utc) assumes the input is UTC
+            rfc3339_str = dt.replace(tzinfo=timezone.utc).isoformat()
 
             #prepare event for api
             event = calendarEvent(
                 title=keyword.capitalize(),
-                date=date_str,
+                date=rfc3339_str,
                 source_line = line.strip()
             )
 

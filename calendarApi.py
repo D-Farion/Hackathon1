@@ -8,7 +8,6 @@ from googleapiclient.errors import HttpError
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = ["https://www.googleapis.com/auth/calendar.events"]
-
     # Creates an all day event
 def create_event(service, calendar_event):
     event = {
@@ -19,7 +18,7 @@ def create_event(service, calendar_event):
     created_event = service.events().insert(calendarId = 'primary', body = event).execute()
     return(created_event)
 
-def logIn():
+def logIn(calendar_event):
     creds = None
 
     # The file token.json stores the user's access and refresh tokens, and is
@@ -45,9 +44,10 @@ def logIn():
         service = build("calendar", "v3", credentials=creds)
         print("OAuth successful. Google Calendar API is ready.")
 
-
     except HttpError as error:
         print(f"An error occurred: {error}")
 
+    create_event(service, calendar_event)
+    
 if __name__ == "__main__":
     main()
