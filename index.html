@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Calendar Sync</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Course Calendar Sync</h1>
+    <p>Upload your course outline and automatically add important dates to Google Calendar.</p>
+</header>
+
+<main class="container">
+
+    
+    <div class="info">
+        <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF">
+        <p>Upload your course outline PDF</p>
+    </div>
+
+
+
+    <!-- Upload box -->
+    <div class="upload-box" id="dropBox">
+        <h2>Upload Course Outline</h2>
+        <p class="drag-text">Drag & drop your PDF here</p>
+        <p>or</p>
+        <input type="file" id="fileInput" accept=".pdf" hidden>
+
+        <button class="file-btn" id="fileBtn">Choose PDF</button>
+        <button class="upload-btn">Upload</button>
+
+        <p id="fileName" class="file-name">No file selected</p>
+
+        <small>Your events will appear directly in Google Calendar.</small>
+    </div>
+
+    
+    <div class="info">
+        <img src="https://cdn-icons-png.flaticon.com/512/3652/3652191.png" alt="Calendar">
+        <p>Important dates appear in Google Calendar automatically</p>
+    </div>
+
+</main>
+
+<section class="steps">
+    <div class="step">
+        <p>1. Upload course outline</p>
+    </div>
+    <div class="step">
+        <p>2. We extract deadlines</p>
+    </div>
+    <div class="step">
+        <p>3. Dates sync to Google Calendar</p>
+    </div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
