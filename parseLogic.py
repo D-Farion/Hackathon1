@@ -5,13 +5,13 @@ from datetime import datetime, timezone
 
 # event class 
 class calendarEvent:
-    def __init__(self, title, date, source_line):
+    def __init__(self, title, startDate, endDate):
         self.title = title
-        self.date = date
-        self.source_line = source_line
+        self.startDate = startDate
+        self.endDate = endDate
 
     def __repr__(self):
-        return f"Event(title = {self.title}, date = {self.date})"
+        return f"Event(title = {self.title}, startDate = {self.startDate}, endDate = {self.endDate})"
 
 
 #keywords and date patters
@@ -61,18 +61,19 @@ def parsePDF(file_path):
 
             date_str = date_match.group()
             current_year = datetime.now().year
-            date_str = f"Feb 6 {current_year}"
+            date_str = f"{date_str} {current_year}"
             dt = datetime.strptime(date_str, "%b %d %Y")
 
             # 2. Convert to UTC and then to RFC3339 format
             # Using .replace(tzinfo=timezone.utc) assumes the input is UTC
-            rfc3339_str = dt.replace(tzinfo=timezone.utc).isoformat()
+            start = dt.replace(tzinfo=timezone.utc).isoformat()
+            end = dt.replace(hour=23, minute=59, second=0, microsecond=0, tzinfo=timezone.utc).isoformat()
 
             #prepare event for api
             event = calendarEvent(
                 title=keyword.capitalize(),
-                date=rfc3339_str,
-                source_line = line.strip()
+                startDate=start,
+                endDate=end,
             )
 
             events.append(event)

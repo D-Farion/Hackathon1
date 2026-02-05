@@ -12,8 +12,8 @@ SCOPES = ["https://www.googleapis.com/auth/calendar.events"]
 def create_event(service, calendar_event):
     event = {
         'summary': calendar_event.title,
-        'start': { 'date': calendar_event.date},
-        'end': {'date': calendar_event.date},
+        'start': { 'date': calendar_event.startDate},
+        'end': {'date': calendar_event.endDate},
     }
     created_event = service.events().insert(calendarId = 'primary', body = event).execute()
     return(created_event)
@@ -48,6 +48,6 @@ def logIn(calendar_event):
         print(f"An error occurred: {error}")
 
     create_event(service, calendar_event)
-    
+
 if __name__ == "__main__":
     main()
